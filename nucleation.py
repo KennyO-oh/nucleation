@@ -144,7 +144,9 @@ if run_simulation:
 
         # Update the plot
         im.set_array(np.ma.array(st.session_state.phi, mask=~mask))
-        ax.texts = []  # Clear previous texts
+        # Instead of setting ax.texts = [], remove texts individually:
+        for txt in ax.texts:
+            txt.remove()
         ax.text(5, 185, f'Frozen: {frozen_fraction:.1f}%', color='white', fontsize=12,
                 bbox=dict(facecolor='gray', alpha=0.6))
         ax.text(135, 185, f'Temp: {T_eff:.1f}°C', color='white', fontsize=12,
